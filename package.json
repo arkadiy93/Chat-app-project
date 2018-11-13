@@ -16,8 +16,7 @@
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run webpack",
-    "start": "node trol.js",
-
+    "start": "node trol.js"
   },
   "repository": {
     "type": "git",
