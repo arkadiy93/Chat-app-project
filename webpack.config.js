@@ -11,6 +11,7 @@ module.exports = {
   },
   output: {
     publicPath: '/assets/',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
