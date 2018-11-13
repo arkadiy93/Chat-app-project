@@ -15,8 +15,7 @@
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
-    "webpack": "webpack --watch",
-    "start": "node server/bin/slack.js"
+    "webpack": "webpack --watch"
   },
   "repository": {
     "type": "git",
