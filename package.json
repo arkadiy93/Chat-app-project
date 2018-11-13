@@ -15,7 +15,8 @@
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
