@@ -15,8 +15,8 @@
     "build-server": "babel server --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
-    "postinstall": "npm run webpack",
-    "start": "node trol.js"
+    "postinstall": "npm run build",
+    "start": "babel-node ./server/bin/slack.js"
   },
   "repository": {
     "type": "git",

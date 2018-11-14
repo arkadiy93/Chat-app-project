@@ -10,8 +10,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   output: {
-    filename: 'trol.js',
-    publicPath: '/assets/',
+     publicPath: '/assets/',
   },
   module: {
     rules: [
