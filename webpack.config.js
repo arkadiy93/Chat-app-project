@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: [
@@ -13,7 +11,6 @@ module.exports = {
   },
   output: {
     publicPath: '/assets/',
-    path: path.resolve(__dirname, 'assets'),
   },
   module: {
     rules: [
