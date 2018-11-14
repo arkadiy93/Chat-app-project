@@ -1,2 +1,2 @@
 # slack hexlet project
-< href="https://slack-project-arkadiy.herokuapp.com/">heroku</a>
+<a href="https://slack-project-arkadiy.herokuapp.com/">heroku</a>
