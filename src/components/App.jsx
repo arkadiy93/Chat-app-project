@@ -1,10 +1,14 @@
 import React from 'react';
-import ChannelList from './ChannelList.jsx';
+import SideBar from './SideBar.jsx';
+import MainField from './MainField.jsx';
 
 const App = ({ initialData }) => {
   const { channels } = initialData;
   return (
-    <ChannelList initialChannels={channels} />
+    <div>
+      <SideBar initialChannels={channels} />
+      <MainField />
+    </div>
   );
 };
 
