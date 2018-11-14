@@ -2,7 +2,7 @@ import React from 'react';
 
 const ChannelList = ({ initialChannels }) => (
   <ul>
-    {initialChannels.map(({ id, name }) => <li key={id}>{name}</li>)}
+    {initialChannels.map(({ id, name }) => <li className="trol" key={id}>{name}</li>)}
   </ul>
 );
 
