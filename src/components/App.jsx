@@ -1,15 +1,14 @@
 import React from 'react';
 import SideBar from './SideBar.jsx';
 import MainField from './MainField.jsx';
+import { DataProvider } from './DataContext';
 
-const App = ({ initialData }) => {
-  const { channels } = initialData;
-  return (
-    <div>
-      <SideBar initialChannels={channels} />
-      <MainField />
-    </div>
-  );
-};
+const App = ({ initialData }) => (
+  <DataProvider value={initialData}>
+    <SideBar />
+    <MainField />
+  </DataProvider>
+);
+
 
 export default App;

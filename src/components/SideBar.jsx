@@ -1,4 +1,6 @@
 import React from 'react';
+import { DataConsumer } from './DataContext';
+
 
 const renderChannels = channels => (
   <ul>
@@ -8,13 +10,17 @@ const renderChannels = channels => (
   </ul>
 );
 
-const SideBar = ({ initialChannels }) => (
-  <div id="sidebar">
-    <div className="sidebar-header">
-      <h5>Channels</h5>
-    </div>
-    {renderChannels(initialChannels)}
-  </div>
+const SideBar = () => (
+  <DataConsumer>
+    {({ channels }) => (
+      <div id="sidebar">
+        <div className="sidebar-header">
+          <h5>Channels</h5>
+        </div>
+        {renderChannels(channels)}
+      </div>
+    )}
+  </DataConsumer>
 );
 
 export default SideBar;
