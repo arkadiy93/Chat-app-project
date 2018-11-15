@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "jest",
-    "webpack" : "webpack -p",
+    "webpack": "webpack -p",
     "build-server": "babel server --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
@@ -67,6 +67,7 @@
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"

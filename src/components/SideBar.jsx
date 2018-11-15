@@ -5,19 +5,22 @@ import { DataConsumer } from './DataContext';
 const renderChannels = channels => (
   <ul>
     {channels.map(({ id, name }) => (
-      <li className="active" key={id}>{`# ${name}`}</li>
+      <li key={id}>{`# ${name}`}</li>
     ))}
   </ul>
 );
 
+
 const SideBar = () => (
   <DataConsumer>
     {({ channels }) => (
-      <div id="sidebar">
+      <div className="sidebar col-2" align="center">
         <div className="sidebar-header">
           <h5>Channels</h5>
         </div>
-        {renderChannels(channels)}
+        <div className="sidebar-content">
+          {renderChannels(channels)}
+        </div>
       </div>
     )}
   </DataConsumer>

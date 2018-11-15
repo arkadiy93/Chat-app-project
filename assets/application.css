@@ -1,32 +1,30 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+html, body {
+    height: 100%;
+    margin: 0;
+}
 
 .container {
-  padding-left: 0;
-  margin-left: 0;
+  margin: 0px !important;
+  height: 91.8%;
 }
 
-#sidebar {
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 100vh;
+#chat {
+  height: 100%
 }
 
-p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
-    font-weight: 300;
-    line-height: 1.7em;
+.sidebar {
+  background: #4D394B;
+  color: #fff;
+  padding: 20px 0 0 0;
 }
 
-#sidebar {
-    background: #4D394B;
-    color: #fff;
+.sidebar-header {
+  height: 5%;
+  cursor: pointer;
 }
 
-#sidebar .sidebar-header {
-    padding-left: 20px;
-    padding-top:20px;
-    background: #4D394B;
+.sidebar-content {
+  height: 95%
 }
 
 ul {
@@ -35,13 +33,29 @@ ul {
 
 }
 
-#sidebar ul li{
-  padding-left:20px;
-  padding-bottom:2px;
-}
-
-
-#sidebar ul li:hover {
+.sidebar ul li:hover {
   background: #3E313C;
   cursor: pointer;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border-color: #aaaaaa;
+}
+
+.btn:focus, .btn.focus {
+	box-shadow: none;
+}
+
+.input {
+  margin:5px;
+}
+
+.screen {
+  height: 90%
+  
+}
+
+.mainField {
+  padding: 0px;
 }

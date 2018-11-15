@@ -5,8 +5,10 @@ import { DataProvider } from './DataContext';
 
 const App = ({ initialData }) => (
   <DataProvider value={initialData}>
-    <SideBar />
-    <MainField />
+    <div className="app row h-100">
+      <SideBar />
+      <MainField />
+    </div>
   </DataProvider>
 );
 
