@@ -1,29 +1,49 @@
 import React from 'react';
-import { DataConsumer } from './DataContext';
+import cn from 'classnames';
+import { DataContext } from '../context/DataContext';
 
+class SideBar extends React.Component {
+  state = {
+    openChannel: this.context.currentChannelId,
+  }
 
-const renderChannels = channels => (
-  <ul>
-    {channels.map(({ id, name }) => (
-      <li key={id}>{`# ${name}`}</li>
-    ))}
-  </ul>
-);
+  listClass = (id) => {
+    const { openChannel } = this.state;
+    return cn(
+      'list-group-item',
+      'list-group-item-action',
+      {
+        'list-group-item-success': id !== openChannel,
+        'list-group-item-light': id === openChannel,
+      },
+    );
+  };
 
+  renderChannels = channels => (
+    <ul className="list-group list-group-flush">
+      {channels.map(({ id, name }) => (
+        <li className={this.listClass(id)} key={id}>
+          {`# ${name}`}
+        </li>
+      ))}
+    </ul>
+  );
 
-const SideBar = () => (
-  <DataConsumer>
-    {({ channels }) => (
-      <div className="sidebar col-2" align="center">
-        <div className="sidebar-header">
+  render() {
+    const { channels } = this.context;
+
+    return (
+      <div className="col-2" align="center">
+        <div className="">
           <h5>Channels</h5>
         </div>
-        <div className="sidebar-content">
-          {renderChannels(channels)}
+        <div className="">
+          {this.renderChannels(channels)}
         </div>
       </div>
-    )}
-  </DataConsumer>
-);
+    );
+  }
+}
 
+SideBar.contextType = DataContext;
 export default SideBar;
