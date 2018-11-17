@@ -6,7 +6,7 @@ class SideBar extends React.Component {
   // this is temporary. Will be changed as soon as i add more functionality
   state = {
     openChannel: this.context.currentChannelId,
-  }
+  };
 
   listClass = (id) => {
     const { openChannel } = this.state;

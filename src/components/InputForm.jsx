@@ -15,7 +15,9 @@ const sendMessage = (props, channelId) => ({ message }) => {
 };
 
 const InputForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, messageSendingState } = props;
+  const disabled = messageSendingState === 'requested';
+  //
   return (
     <DataConsumer>
       {({ currentChannelId }) => (
@@ -31,7 +33,13 @@ const InputForm = (props) => {
             component="input"
           />
           <span className="input-group-btn">
-            <button className="btn btn-default btn-lg" type="submit">Send</button>
+            <button
+              className="btn btn-default btn-lg"
+              type="submit"
+              disabled={disabled}
+            >
+            Send
+            </button>
           </span>
         </form>
       )}

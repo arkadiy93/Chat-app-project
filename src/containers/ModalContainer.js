@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Component from '../components/InputForm';
+import Component from '../components/ModalContainer';
 import * as actionCreators from '../actions';
 
 const mapStateToProps = ({ messageSendingState }) => {

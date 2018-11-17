@@ -10,7 +10,7 @@ import App from './components/App';
 import { DataProvider } from './context/DataContext';
 import { addMessageToList, initializeMessageList } from './actions/index';
 
-const socket = io('http://localhost:4000');
+const socket = io();
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
