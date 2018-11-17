@@ -1,22 +1,33 @@
 import React from 'react';
-// import MessagesField from './MessagesField';
-// import InputField from './InputField';
+import InputFormContainer from '../containers/InputFormContainer';
+import { DataConsumer } from '../context/DataContext';
 
-const MainField = () => (
-  <div className="col mh-100">
+const renderMessages = (currentChannel, messages) => {
+  const channelMessages = messages.filter(({ channelId }) => channelId === currentChannel);
+  if (channelMessages.length === 0) return null;
+  return channelMessages.map(({ message, author, id }) => (
+    <div key={id}>
+      <b>{ author }</b>
+      <p>{ message }</p>
+    </div>
+  ));
+};
+
+
+const MainField = ({ data }) => (
+  <div className="col">
     <div className="row input">
       <div className="col-lg-12">
-        <form className="input-group input-group-lg">
-          <input type="text" className="form-control input-lg" placeholder="Type message..." />
-          <span className="input-group-btn">
-            <button className="btn btn-default btn-lg" type="submit">Send</button>
-          </span>
-        </form>
+        <InputFormContainer />
       </div>
     </div>
-    <div className="jumbotron bg-white">
-      Messages
-    </div>
+    <DataConsumer>
+      {({ currentChannelId }) => (
+        <div className="jumbotron bg-white d-flex flex-column-reverse">
+          {renderMessages(currentChannelId, data)}
+        </div>
+      )}
+    </DataConsumer>
   </div>
 );
 

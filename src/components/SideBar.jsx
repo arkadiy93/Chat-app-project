@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { DataContext } from '../context/DataContext';
 
 class SideBar extends React.Component {
-  // this is temporary. Will be changed as soon as i ad more functionality 
+  // this is temporary. Will be changed as soon as i add more functionality
   state = {
     openChannel: this.context.currentChannelId,
   }

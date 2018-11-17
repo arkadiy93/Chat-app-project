@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import Component from '../components/MainField';
 import * as actionCreators from '../actions';
-// import { tasksSelector } from '../selectors';
+import dataSelector from '../selectors';
 
 const mapStateToProps = (state) => {
   const props = {
-    messages: state,
+    data: dataSelector(state),
   };
   return props;
 };

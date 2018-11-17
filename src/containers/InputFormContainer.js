@@ -1,12 +1,9 @@
 import { connect } from 'react-redux';
-import Component from '../components/SideBar';
+import Component from '../components/InputForm';
 import * as actionCreators from '../actions';
 
-
-const mapStateToProps = (state) => {
-  const props = {
-    channels: state,
-  };
+const mapStateToProps = () => {
+  const props = {};
   return props;
 };
 
