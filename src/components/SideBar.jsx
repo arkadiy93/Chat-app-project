@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import Octicon, { Plus } from '@githubprimer/octicons-react'
 import { DataContext } from '../context/DataContext';
 
 class SideBar extends React.Component {
@@ -20,13 +21,21 @@ class SideBar extends React.Component {
     );
   };
 
+  handleAddChannel = (e) => {
+    // addChannelActions
+  }
+
   renderChannels = channels => (
     <div className="list-group list-group-flush">
       <button
-        className="list-group-item list-group-item-warning list-group-item-action"
+        className="btn btn-outline-dark border-0 w-50"
+        // className="list-group-item list-group-item-warning list-group-item-action"
         type="button"
+        title="Add new channel"
+        onMouseDown={e => e.preventDefault()} // prevent focus effect
+        onClick={this.handleAddChannel}
       >
-      Add channel
+        <Octicon icon={Plus} ariaLabel="Add new item" />
       </button>
       {channels.map(({ id, name }) => (
         <button
@@ -44,7 +53,7 @@ class SideBar extends React.Component {
     const { channels } = this.context;
 
     return (
-      <div className="col-2" align="center">
+      <div className="col-3" align="center">
         <div className="">
           <h5>Channels</h5>
         </div>
