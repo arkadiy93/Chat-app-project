@@ -20,14 +20,25 @@ class SideBar extends React.Component {
     );
   };
 
+  addChannel = () => {
+
+  }
+
   renderChannels = channels => (
-    <ul className="list-group list-group-flush">
+    <div className="list-group list-group-flush">
+      <button
+        className="list-group-item list-group-item-warning list-group-item-action"
+        type="button"
+        onClick={this.addChannel}
+      >
+      Add channel
+      </button>
       {channels.map(({ id, name }) => (
-        <li className={this.listClass(id)} key={id}>
+        <button type="button" className={this.listClass(id)} key={id}>
           {`# ${name}`}
-        </li>
+        </button>
       ))}
-    </ul>
+    </div>
   );
 
   render() {

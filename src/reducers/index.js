@@ -28,7 +28,7 @@ const messagesData = handleActions({
 const modalData = handleActions({
   [actions.sendMessageFailure]() {
     return {
-      isOpen: 'true',
+      isOpen: true,
       title: 'Connection Error',
       body: 'Your message was not sent',
     };

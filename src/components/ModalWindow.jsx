@@ -1,35 +1,48 @@
 import React from 'react';
+import Modal from 'react-bootstrap/lib/Modal';
+import Button from 'react-bootstrap/lib/Button';
 
+class ModalWindow extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.handleClose = this.handleClose.bind(this);
+    this.state = {
+      show: false,
+    };
+  }
 
-const handleClick = closeModal => () => {
-  closeModal();
-};
+  componentWillReceiveProps(nextProps) {
+    const { modalData } = nextProps;
+    if (modalData.isOpen) {
+      this.setState({ show: true });
+    }
+  }
 
-const renderModal = ({ body, title }, closeModal) => (
-  <div style={{ display: 'block' }} className="modal fade show" id="modal" tabIndex="-1" role="dialog">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          <div className="modal-title">{title}</div>
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          <p>{body}</p>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" onClick={handleClick(closeModal)}>Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+  handleClose() {
+    this.setState({ show: false });
+  }
 
+  render() {
+    const { show } = this.state;
+    const { modalData } = this.props;
 
-const ModalWindow = ({ modalData, closeModalWindow }) => {
-  const { isOpen } = modalData;
-  return isOpen ? renderModal(modalData, closeModalWindow) : null;
-};
+    return (
+      <>
+        <Modal show={show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>{modalData.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{modalData.body}</Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+}
+
 
 export default ModalWindow;
