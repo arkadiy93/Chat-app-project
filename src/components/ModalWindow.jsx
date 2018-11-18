@@ -19,6 +19,8 @@ class ModalWindow extends React.Component {
   }
 
   handleClose() {
+    const { closeModalWindow } = this.props;
+    this.props.closeModalWindow();
     this.setState({ show: false });
   }
 
