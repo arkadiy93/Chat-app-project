@@ -6,31 +6,19 @@ class ModalWindow extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.handleClose = this.handleClose.bind(this);
-    this.state = {
-      show: false,
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { modalData } = nextProps;
-    if (modalData.isOpen) {
-      this.setState({ show: true });
-    }
   }
 
   handleClose() {
     const { closeModalWindow } = this.props;
-    this.props.closeModalWindow();
-    this.setState({ show: false });
+    closeModalWindow();
   }
 
   render() {
-    const { show } = this.state;
     const { modalData } = this.props;
 
     return (
       <>
-        <Modal show={show} onHide={this.handleClose}>
+        <Modal show={modalData.isOpen} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{modalData.title}</Modal.Title>
           </Modal.Header>
