@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import Component from '../components/ModalContainer';
+import Component from '../components/ModalWindow';
 import * as actionCreators from '../actions';
 
-const mapStateToProps = ({ messageSendingState }) => {
+const mapStateToProps = ({ modalData }) => {
   const props = {
-    messageSendingState,
+    modalData,
   };
   return props;
 };

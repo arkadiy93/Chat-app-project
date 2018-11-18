@@ -16,7 +16,7 @@ const messageSendingState = handleActions({
   },
 }, 'none');
 
-const data = handleActions({
+const messagesData = handleActions({
   [actions.addMessageToList](state, { payload: { attributes } }) {
     return { ...state, [attributes.id]: attributes };
   },
@@ -25,9 +25,23 @@ const data = handleActions({
   },
 }, {});
 
+const modalData = handleActions({
+  [actions.sendMessageFailure]() {
+    return {
+      isOpen: 'true',
+      title: 'Connection Error',
+      body: 'Your message was not sent',
+    };
+  },
+  [actions.closeModalWindow]() {
+    return { isOpen: false };
+  },
+}, { isOpen: false });
+
 
 export default combineReducers({
   form: formReducer,
-  data,
+  messagesData,
   messageSendingState,
+  modalData,
 });

@@ -3,10 +3,8 @@ import Component from '../components/SideBar';
 import * as actionCreators from '../actions';
 
 
-const mapStateToProps = (state) => {
-  const props = {
-    channels: state,
-  };
+const mapStateToProps = () => {
+  const props = {};
   return props;
 };
 

@@ -5,7 +5,7 @@ import dataSelector from '../selectors';
 
 const mapStateToProps = (state) => {
   const props = {
-    data: dataSelector(state),
+    messagesData: dataSelector(state),
   };
   return props;
 };

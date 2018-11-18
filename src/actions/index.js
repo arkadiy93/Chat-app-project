@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import routes from '../routes';
 
+export const closeModalWindow = createAction('CLOSE_MODAL_WINDOW');
+
 export const sendMessageRequest = createAction('SEND_MESSAGE_REQUEST');
 export const sendMessageSuccess = createAction('SEND_MESSAGE_SUCCESS');
 export const sendMessageFailure = createAction('SEND_MESSAGE_FAILURE');

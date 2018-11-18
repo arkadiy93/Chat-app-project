@@ -14,7 +14,7 @@ const renderMessages = (currentChannel, messages) => {
 };
 
 
-const MainField = ({ data }) => (
+const MainField = ({ messagesData }) => (
   <div className="col">
     <div className="row input">
       <div className="col-lg-12">
@@ -24,7 +24,7 @@ const MainField = ({ data }) => (
     <DataConsumer>
       {({ currentChannelId }) => (
         <div className="jumbotron bg-white d-flex flex-column-reverse">
-          {renderMessages(currentChannelId, data)}
+          {renderMessages(currentChannelId, messagesData)}
         </div>
       )}
     </DataConsumer>
