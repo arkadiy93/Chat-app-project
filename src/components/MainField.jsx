@@ -3,7 +3,9 @@ import InputFormContainer from '../containers/InputFormContainer';
 import { DataConsumer } from '../context/DataContext';
 
 const renderMessages = (currentChannel, messages) => {
-  const channelMessages = messages.filter(({ channelId }) => channelId === currentChannel);
+  const channelMessages = messages
+    .filter(({ channelId }) => channelId === currentChannel)
+    .reverse();
   if (channelMessages.length === 0) return null;
   return channelMessages.map(({ message, author, id }) => (
     <div key={id}>
@@ -23,7 +25,7 @@ const MainField = ({ messagesData }) => (
     </div>
     <DataConsumer>
       {({ currentChannelId }) => (
-        <div className="jumbotron bg-white d-flex flex-column-reverse">
+        <div className="bg-white pre-scrollable">
           {renderMessages(currentChannelId, messagesData)}
         </div>
       )}
