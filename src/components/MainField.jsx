@@ -1,6 +1,17 @@
 import React from 'react';
-import InputFormContainer from '../containers/InputFormContainer';
-import { DataConsumer } from '../context/DataContext';
+import { connect } from 'react-redux';
+import InputForm from './InputForm';
+import * as actionCreators from '../actions';
+import { messagesSelector } from '../selectors';
+
+const mapStateToProps = (state) => {
+  const { currentChannel } = state;
+  const props = {
+    messagesData: messagesSelector(state),
+    currentChannel,
+  };
+  return props;
+};
 
 const renderMessages = (currentChannel, messages) => {
   const channelMessages = messages
@@ -15,22 +26,23 @@ const renderMessages = (currentChannel, messages) => {
   ));
 };
 
-
-const MainField = ({ messagesData }) => (
-  <div className="col">
-    <div className="row input">
-      <div className="col-lg-12">
-        <InputFormContainer />
-      </div>
-    </div>
-    <DataConsumer>
-      {({ currentChannelId }) => (
-        <div className="bg-white pre-scrollable">
-          {renderMessages(currentChannelId, messagesData)}
+@connect(mapStateToProps, actionCreators)
+class MainField extends React.Component {
+  render() {
+    const { messagesData, currentChannel } = this.props;
+    return (
+      <div className="col">
+        <div className="row input">
+          <div className="col-lg-12">
+            <InputForm />
+          </div>
         </div>
-      )}
-    </DataConsumer>
-  </div>
-);
+        <div className="bg-white pre-scrollable">
+          {renderMessages(currentChannel, messagesData)}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default MainField;

@@ -1,8 +1,14 @@
 import { createSelector } from 'reselect';
 
-const getData = state => state.messagesData;
+const getMessagesData = state => state.messagesData;
+const getChannels = state => state.channelsData;
 
-export default createSelector(
-  getData,
+export const messagesSelector = createSelector(
+  getMessagesData,
+  data => Object.values(data),
+);
+
+export const channelsSelector = createSelector(
+  getChannels,
   data => Object.values(data),
 );

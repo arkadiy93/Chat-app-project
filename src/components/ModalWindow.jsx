@@ -1,7 +1,17 @@
 import React from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import Button from 'react-bootstrap/lib/Button';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions';
 
+const mapStateToProps = ({ modalData }) => {
+  const props = {
+    modalData,
+  };
+  return props;
+};
+
+@connect(mapStateToProps, actionCreators)
 class ModalWindow extends React.Component {
   constructor(props, context) {
     super(props, context);

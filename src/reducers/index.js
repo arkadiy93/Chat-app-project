@@ -25,6 +25,12 @@ const messagesData = handleActions({
   },
 }, {});
 
+const channelsData = handleActions({
+  [actions.initializeChannelList](state, { payload: { channels } }) {
+    return { ...channels };
+  },
+}, {});
+
 const modalData = handleActions({
   [actions.sendMessageFailure]() {
     return {
@@ -38,10 +44,18 @@ const modalData = handleActions({
   },
 }, { isOpen: false });
 
+const currentChannel = handleActions({
+  [actions.changeChannel](state, { payload: { id } }) {
+    return id;
+  },
+}, 1);
+
 
 export default combineReducers({
   form: formReducer,
   messagesData,
   messageSendingState,
   modalData,
+  currentChannel,
+  channelsData,
 });

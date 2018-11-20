@@ -1,13 +1,13 @@
 import React from 'react';
-import SideBarContainer from '../containers/SideBarContainer';
-import MainFieldContainer from '../containers/MainFieldContainer';
-import ModalWindowContainer from '../containers/ModalWindowContainer';
+import SideBar from './SideBar';
+import MainField from './MainField';
+import ModalWindow from './ModalWindow';
 
 const App = () => (
   <div className="row h-100">
-    <SideBarContainer />
-    <MainFieldContainer />
-    <ModalWindowContainer />
+    <SideBar />
+    <MainField />
+    <ModalWindow />
   </div>
 );
 
