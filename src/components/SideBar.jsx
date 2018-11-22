@@ -1,8 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import Octicon, { Plus } from '@githubprimer/octicons-react';
-import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import connect from '../connect';
 import { channelsSelector } from '../selectors';
 
 const mapStateToProps = (state) => {
@@ -14,7 +13,7 @@ const mapStateToProps = (state) => {
   return props;
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class SideBar extends React.Component {
   listClass = (id) => {
     const { currentChannel } = this.props;
@@ -33,13 +32,17 @@ class SideBar extends React.Component {
     changeChannel({ id });
   }
 
+  preventFocus = (e) => {
+    e.preventDefault();
+  }
+
   renderChannels = channels => (
     <div className="list-group list-group-flush">
       <button
         className="btn btn-outline-dark border-0 w-50"
         type="button"
         title="Add new channel"
-        onMouseDown={e => e.preventDefault()} // prevent focus effect
+        onMouseDown={this.preventFocus}
       >
         <Octicon icon={Plus} ariaLabel="Add new item" />
       </button>
@@ -49,7 +52,7 @@ class SideBar extends React.Component {
           className={this.listClass(id)}
           key={id}
           onClick={this.changeChannel(id)}
-          onMouseDown={e => e.preventDefault()}
+          onMouseDown={this.preventFocus}
         >
           {`# ${name}`}
         </button>

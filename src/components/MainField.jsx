@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import InputForm from './InputForm';
-import * as actionCreators from '../actions';
 import { messagesSelector } from '../selectors';
+import connect from '../connect';
 
 const mapStateToProps = (state) => {
   const { currentChannel } = state;
@@ -26,7 +25,7 @@ const renderMessages = (currentChannel, messages) => {
   ));
 };
 
-@connect(mapStateToProps, actionCreators)
+@connect(mapStateToProps)
 class MainField extends React.Component {
   render() {
     const { messagesData, currentChannel } = this.props;

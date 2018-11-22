@@ -1,8 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
 import { DataConsumer } from '../context/DataContext';
+import connect from '../connect';
 
 const mapStateToProps = ({ messageSendingState, currentChannel }) => {
   const props = {
@@ -12,25 +11,22 @@ const mapStateToProps = ({ messageSendingState, currentChannel }) => {
   return props;
 };
 
-@connect(mapStateToProps, actionCreators)
-@reduxForm({ form: 'newMessage' })
+@connect(mapStateToProps)
+@reduxForm({
+  form: 'newMessage',
+  onSubmitSuccess: (...args) => {
+    const [,, props] = args;
+    if (props.dirty && props.values.message.trim()) props.reset();
+  },
+})
 class InputForm extends React.Component {
   sendMessage = author => ({ message }) => {
-    const {
-      dirty,
-      sendMessage,
-      currentChannel,
-      reset,
-    } = this.props;
-    if (!dirty || !message.trim()) return;
-    sendMessage({ currentChannel, message, author });
-    reset();
+    const { sendMessage, currentChannel } = this.props;
+    return sendMessage({ currentChannel, message, author });
   };
 
   render() {
-    const { handleSubmit, messageSendingState } = this.props;
-    const disabled = messageSendingState === 'requested';
-
+    const { handleSubmit, submitting } = this.props;
     return (
       <DataConsumer>
         {author => (
@@ -44,12 +40,13 @@ class InputForm extends React.Component {
               className="form-control input-lg"
               placeholder="Type message..."
               component="input"
+              disabled={submitting}
             />
             <span className="input-group-btn">
               <button
                 className="btn btn-default btn-lg"
                 type="submit"
-                disabled={disabled}
+                disabled={submitting}
               >
               Send
               </button>

@@ -1,23 +1,24 @@
 import { createAction } from 'redux-actions';
 import axios from 'axios';
-import cookies from 'js-cookie';
 
 import routes from '../routes';
 
-export const closeModalWindow = createAction('CLOSE_MODAL_WINDOW');
+export const closeModalWindow = createAction('MODAL_WINDOW_CLOSE');
 
-export const initializeChannelList = createAction('INITIALIZE_CHANNEL_LIST');
+export const initializeChannelList = createAction('CHANNEL_LIST_INITIALIZE');
+export const changeChannel = createAction('CHANNEL_CHANGE');
 
-export const changeChannel = createAction('CHANGE_CHANNEL');
+export const sendMessageRequest = createAction('MESSAGE_SEND_REQUEST');
+export const sendMessageSuccess = createAction('MESSAGE_SEND_SUCCESS');
+export const sendMessageFailure = createAction('MESSAGE_SEND_FAILURE');
 
-export const sendMessageRequest = createAction('SEND_MESSAGE_REQUEST');
-export const sendMessageSuccess = createAction('SEND_MESSAGE_SUCCESS');
-export const sendMessageFailure = createAction('SEND_MESSAGE_FAILURE');
-
-export const addMessageToList = createAction('ADD_MESSAGE_TO_LIST');
-export const initializeMessageList = createAction('INITIALIZE_MESSAGE_LIST');
+export const addMessageToList = createAction('MESSAGE_ADD_TO_LIST');
+export const initializeMessageList = createAction('MESSAGE_LIST_INITIALIZE');
 
 export const sendMessage = ({ currentChannel, message, author }) => async (dispatch) => {
+  if (!message || !message.trim()) {
+    return;
+  }
   dispatch(sendMessageRequest());
   try {
     const response = await axios.post(routes.messagesUrl(currentChannel), {
@@ -27,7 +28,9 @@ export const sendMessage = ({ currentChannel, message, author }) => async (dispa
     });
     dispatch(sendMessageSuccess({ task: response.data }));
   } catch (e) {
-    console.log(e);
     dispatch(sendMessageFailure());
+    throw e;
+    // in case we dont throw an error, the returned value will be a fulfilled promise
+  // and it will trigger "onSubmitSuccess" configuration  property
   }
 };
