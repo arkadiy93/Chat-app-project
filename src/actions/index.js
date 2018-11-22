@@ -1,5 +1,6 @@
 import { createAction } from 'redux-actions';
 import axios from 'axios';
+import { SubmissionError } from 'redux-form';
 
 import routes from '../routes';
 
@@ -17,7 +18,7 @@ export const initializeMessageList = createAction('MESSAGE_LIST_INITIALIZE');
 
 export const sendMessage = ({ currentChannel, message, author }) => async (dispatch) => {
   if (!message || !message.trim()) {
-    return;
+    throw new SubmissionError('emtpy message');
   }
   dispatch(sendMessageRequest());
   try {

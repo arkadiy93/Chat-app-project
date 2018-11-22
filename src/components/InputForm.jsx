@@ -16,7 +16,7 @@ const mapStateToProps = ({ messageSendingState, currentChannel }) => {
   form: 'newMessage',
   onSubmitSuccess: (...args) => {
     const [,, props] = args;
-    if (props.dirty && props.values.message.trim()) props.reset();
+    props.reset();
   },
 })
 class InputForm extends React.Component {
