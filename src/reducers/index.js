@@ -34,15 +34,18 @@ const channelsData = handleActions({
 const modalData = handleActions({
   [actions.sendMessageFailure]() {
     return {
-      isOpen: true,
-      title: 'Connection Error',
-      body: 'Your message was not sent',
+      modalType: 'INFO_MODAL',
+      modalProps: {
+        title: 'Connection Error',
+        body: 'Your message was not sent',
+        isOpen: true,
+      },
     };
   },
   [actions.closeModalWindow]() {
-    return { isOpen: false };
+    return { modalType: null, modalProps: {} };
   },
-}, { isOpen: false });
+}, { modalType: null, modalProps: {} });
 
 const currentChannel = handleActions({
   [actions.changeChannel](state, { payload: { id } }) {
