@@ -39,7 +39,7 @@ export const sendMessage = ({ currentChannel, message, author }) => async (dispa
     dispatch(sendMessageFailure());
     throw e;
     // in case we dont throw an error, the returned value will be a fulfilled promise
-  // and it will trigger "onSubmitSuccess" configuration  property
+    // and it will trigger "onSubmitSuccess" configuration  property
   }
 };
 
