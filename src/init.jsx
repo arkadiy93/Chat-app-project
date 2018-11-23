@@ -9,17 +9,21 @@ import cookies from 'js-cookie';
 import reducers from './reducers';
 import App from './components/App';
 import { DataProvider } from './context/DataContext';
-import { addMessageToList, initializeMessageList, initializeChannelList } from './actions/index';
+import * as actions from './actions';
 
 const initializeProject = (store, initialData) => {
   const { messages, channels } = initialData;
   const socket = io();
   socket.on('newMessage', ({ data }) => {
     const { attributes } = data;
-    store.dispatch(addMessageToList({ attributes }));
+    store.dispatch(actions.addMessageToList({ attributes }));
   });
-  store.dispatch(initializeMessageList({ messages }));
-  store.dispatch(initializeChannelList({ channels }));
+  socket.on('newChannel', ({ data }) => {
+    const { attributes } = data;
+    store.dispatch(actions.addChannelToList({ attributes }));
+  });
+  store.dispatch(actions.initializeMessageList({ messages }));
+  store.dispatch(actions.initializeChannelList({ channels }));
 };
 
 export default (initialData) => {

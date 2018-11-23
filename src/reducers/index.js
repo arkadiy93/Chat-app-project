@@ -16,6 +16,18 @@ const messageSendingState = handleActions({
   },
 }, 'none');
 
+const channelAddingState = handleActions({
+  [actions.addChannelRequest]() {
+    return 'requested';
+  },
+  [actions.addChannelFailure]() {
+    return 'failed';
+  },
+  [actions.addChannelSuccess]() {
+    return 'successed';
+  },
+}, 'none');
+
 const messagesData = handleActions({
   [actions.addMessageToList](state, { payload: { attributes } }) {
     return { ...state, [attributes.id]: attributes };
@@ -26,6 +38,9 @@ const messagesData = handleActions({
 }, {});
 
 const channelsData = handleActions({
+  [actions.addChannelToList](state, { payload: { attributes } }) {
+    return { ...state, [attributes.id]: attributes };
+  },
   [actions.initializeChannelList](state, { payload: { channels } }) {
     return { ...channels };
   },
@@ -38,6 +53,16 @@ const modalData = handleActions({
       modalProps: {
         title: 'Connection Error',
         body: 'Your message was not sent',
+        isOpen: true,
+      },
+    };
+  },
+  [actions.askChannelName]() {
+    return {
+      modalType: 'ADD_CHANNEL_MODAL',
+      modalProps: {
+        title: 'Channel information',
+        body: 'Set a name for your channel: ',
         isOpen: true,
       },
     };
@@ -61,4 +86,5 @@ export default combineReducers({
   modalData,
   currentChannel,
   channelsData,
+  channelAddingState,
 });

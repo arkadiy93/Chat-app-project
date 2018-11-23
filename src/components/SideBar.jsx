@@ -36,6 +36,11 @@ class SideBar extends React.Component {
     e.preventDefault();
   }
 
+  handleAddButton = () => {
+    const { askChannelName } = this.props;
+    askChannelName();
+  }
+
   renderChannels = channels => (
     <div className="list-group list-group-flush">
       <button
@@ -43,6 +48,7 @@ class SideBar extends React.Component {
         type="button"
         title="Add new channel"
         onMouseDown={this.preventFocus}
+        onClick={this.handleAddButton}
       >
         <Octicon icon={Plus} ariaLabel="Add new item" />
       </button>

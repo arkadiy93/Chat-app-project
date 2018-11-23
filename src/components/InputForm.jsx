@@ -3,9 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { DataConsumer } from '../context/DataContext';
 import connect from '../connect';
 
-const mapStateToProps = ({ messageSendingState, currentChannel }) => {
+const mapStateToProps = ({ currentChannel }) => {
   const props = {
-    messageSendingState,
     currentChannel,
   };
   return props;

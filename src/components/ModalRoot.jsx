@@ -1,10 +1,12 @@
 import React from 'react';
 import InfoModal from './modals/InfoModal';
+import AddChannelModal from './modals/AddChannelModal';
 import connect from '../connect';
 
 
 const MODAL_COMPONENTS = {
   INFO_MODAL: InfoModal,
+  ADD_CHANNEL_MODAL: AddChannelModal,
   // other modals
 };
 
