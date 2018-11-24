@@ -44,9 +44,6 @@ export const sendMessage = ({ currentChannel, message, author }) => async (dispa
 };
 
 export const addChannel = channelName => async (dispatch) => {
-  if (!channelName || !channelName.trim()) {
-    throw new SubmissionError('empty channel name');
-  }
   dispatch(addChannelRequest());
   try {
     const response = await axios.post(routes.addChannelUrl(), {
