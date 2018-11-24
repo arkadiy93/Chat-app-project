@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import Octicon, { Plus } from '@githubprimer/octicons-react';
+import Octicon, { Plus, Pencil, Trashcan } from '@githubprimer/octicons-react';
 import connect from '../connect';
 import { channelsSelector } from '../selectors';
 
@@ -13,6 +13,25 @@ const mapStateToProps = (state) => {
   return props;
 };
 
+const renderOptions = () => (
+  <div>
+    <button
+      type="button"
+      className="btn btn-outline-light border-0 text-dark"
+      title="Rename channel"
+    >
+      <Octicon icon={Pencil} ariaLabel="Edit channel name" />
+    </button>
+    <button
+      type="button"
+      className="btn btn-outline-light border-0 text-dark"
+      title="Delete channel"
+    >
+      <Octicon icon={Trashcan} ariaLabel="Delete channel" />
+    </button>
+  </div>
+);
+
 @connect(mapStateToProps)
 class SideBar extends React.Component {
   listClass = (id) => {
@@ -20,6 +39,7 @@ class SideBar extends React.Component {
     return cn(
       'list-group-item',
       'list-group-item-action',
+      'd-flex flex-row',
       {
         'list-group-item-success': id === currentChannel,
         'list-group-item-light': id !== currentChannel,
@@ -27,7 +47,8 @@ class SideBar extends React.Component {
     );
   };
 
-  changeChannel = id => () => {
+  changeChannel = id => (e) => {
+    e.preventDefault();
     const { changeChannel } = this.props;
     changeChannel({ id });
   }
@@ -52,16 +73,18 @@ class SideBar extends React.Component {
       >
         <Octicon icon={Plus} ariaLabel="Add new item" />
       </button>
-      {channels.map(({ id, name }) => (
-        <button
-          type="button"
+      {channels.map(({ id, name, removable }) => (
+        <a
+          role="button"
+          href="/"
           className={this.listClass(id)}
-          key={id}
           onClick={this.changeChannel(id)}
           onMouseDown={this.preventFocus}
+          key={id}
         >
-          {`# ${name}`}
-        </button>
+          <span className="p-2 mr-auto">{`# ${name}`}</span>
+          {removable ? renderOptions() : null}
+        </a>
       ))}
     </div>
   );
