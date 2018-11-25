@@ -4,9 +4,9 @@ import connect from '../../connect';
 import { channelsSelector } from '../../selectors';
 
 const mapStateToProps = (state) => {
-  const { channelAddingState } = state;
+  const { channelRenamingState } = state;
   const props = {
-    channelAddingState,
+    channelRenamingState,
     channelsData: channelsSelector(state),
   };
   return props;
@@ -21,16 +21,18 @@ const renderError = () => (
 
 const validation = (...args) => {
   const [value,, props] = args;
-  const { channelsData } = props;
+  const { channelsData, currentName } = props;
   if (!value || !value.trim()) {
     return 'Channel name must include at least one letter';
+  }
+  if (currentName === value) {
+    return 'This is the same as the current name';
   }
   if (channelsData.some(({ name }) => name === value)) {
     return 'A channel with this name already exists';
   }
   return undefined;
 };
-
 
 const renderField = ({
   input,
@@ -57,17 +59,17 @@ const renderField = ({
   form: 'newChannelName',
 })
 class AddChannelForm extends React.Component {
-  setName = ({ channelName }) => {
-    const { addChannel, channelsData } = this.props;
-    return addChannel(channelName, channelsData);
+  setNewName = ({ channelName }) => {
+    const { renameChannel, id } = this.props;
+    return renameChannel(id, channelName);
   };
 
   render() {
-    const { handleSubmit, channelAddingState } = this.props;
-    const hasConnectionError = channelAddingState === 'failed';
+    const { handleSubmit, channelRenamingState } = this.props;
+    const hasConnectionError = channelRenamingState === 'failed';
     return (
       <form
-        onSubmit={handleSubmit(this.setName)}
+        onSubmit={handleSubmit(this.setNewName)}
         className="input-group input-group-lg"
       >
         <Field

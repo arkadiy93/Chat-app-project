@@ -22,6 +22,13 @@ const initializeProject = (store, initialData) => {
     const { attributes } = data;
     store.dispatch(actions.addChannelToList({ attributes }));
   });
+  socket.on('removeChannel', ({ data: { id } }) => {
+    store.dispatch(actions.removeChannelFromList({ id }));
+  });
+  socket.on('renameChannel', ({ data: { attributes: { id, name } } }) => {
+    const data = { id, name };
+    store.dispatch(actions.renameTargetedChannel({ data }));
+  });
   store.dispatch(actions.initializeMessageList({ messages }));
   store.dispatch(actions.initializeChannelList({ channels }));
 };

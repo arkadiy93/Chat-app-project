@@ -1,13 +1,16 @@
 import React from 'react';
 import InfoModal from './modals/InfoModal';
 import AddChannelModal from './modals/AddChannelModal';
+import DeleteConfirmModal from './modals/DeleteConfirmModal';
+import RenameChannelModal from './modals/RenameChannelModal.jsx';
 import connect from '../connect';
 
 
 const MODAL_COMPONENTS = {
   INFO_MODAL: InfoModal,
   ADD_CHANNEL_MODAL: AddChannelModal,
-  // other modals
+  CONFIRM_DELETE_MODAL: DeleteConfirmModal,
+  RENAME_CHANNEL_MODAL: RenameChannelModal,
 };
 
 const mapStateToProps = ({ modalData }) => {

@@ -13,25 +13,6 @@ const mapStateToProps = (state) => {
   return props;
 };
 
-const renderOptions = () => (
-  <div>
-    <button
-      type="button"
-      className="btn btn-outline-light border-0 text-dark"
-      title="Rename channel"
-    >
-      <Octicon icon={Pencil} ariaLabel="Edit channel name" />
-    </button>
-    <button
-      type="button"
-      className="btn btn-outline-light border-0 text-dark"
-      title="Delete channel"
-    >
-      <Octicon icon={Trashcan} ariaLabel="Delete channel" />
-    </button>
-  </div>
-);
-
 @connect(mapStateToProps)
 class SideBar extends React.Component {
   listClass = (id) => {
@@ -62,6 +43,42 @@ class SideBar extends React.Component {
     askChannelName();
   }
 
+  handleDeleteButton = id => (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const { showDeleteConfirmation } = this.props;
+    showDeleteConfirmation({ id });
+  };
+
+  handleRenameButton = (id, targetName) => (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    const { showRenameInput } = this.props;
+    const data = { id, targetName };
+    showRenameInput({ data });
+  };
+
+  renderOptions = (id, targetName) => (
+    <div>
+      <button
+        type="button"
+        className="btn btn-outline-light border-0 text-dark"
+        title="Rename channel"
+        onClick={this.handleRenameButton(id, targetName)}
+      >
+        <Octicon icon={Pencil} ariaLabel="Edit channel name" />
+      </button>
+      <button
+        type="button"
+        className="btn btn-outline-light border-0 text-dark"
+        title="Delete channel"
+        onClick={this.handleDeleteButton(id)}
+      >
+        <Octicon icon={Trashcan} ariaLabel="Delete channel" />
+      </button>
+    </div>
+  );
+
   renderChannels = channels => (
     <div className="list-group list-group-flush">
       <button
@@ -83,7 +100,7 @@ class SideBar extends React.Component {
           key={id}
         >
           <span className="p-2 mr-auto">{`# ${name}`}</span>
-          {removable ? renderOptions() : null}
+          {removable ? this.renderOptions(id, name) : null}
         </a>
       ))}
     </div>
