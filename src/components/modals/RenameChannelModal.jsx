@@ -19,8 +19,9 @@ class RenameChannelModal extends React.Component {
   }
 
   handleClose() {
-    const { closeModalWindow } = this.props;
+    const { closeModalWindow, cleanChannelFailure } = this.props;
     closeModalWindow();
+    cleanChannelFailure();
   }
 
   render() {

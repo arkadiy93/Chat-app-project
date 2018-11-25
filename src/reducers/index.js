@@ -26,6 +26,9 @@ const channelAddingState = handleActions({
   [actions.addChannelSuccess]() {
     return 'successed';
   },
+  [actions.cleanChannelFailure]() {
+    return 'none';
+  },
 }, 'none');
 
 const channelDeletingState = handleActions({
@@ -38,6 +41,9 @@ const channelDeletingState = handleActions({
   [actions.deleteChannelSuccess]() {
     return 'successed';
   },
+  [actions.cleanChannelFailure]() {
+    return 'none';
+  },
 }, 'none');
 
 const channelRenamingState = handleActions({
@@ -49,6 +55,9 @@ const channelRenamingState = handleActions({
   },
   [actions.renameChannelSuccess]() {
     return 'successed';
+  },
+  [actions.cleanChannelFailure]() {
+    return 'none';
   },
 }, 'none');
 

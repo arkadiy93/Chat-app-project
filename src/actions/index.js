@@ -16,10 +16,12 @@ export const changeChannel = createAction('CHANNEL_CHANGE');
 export const addChannelToList = createAction('CHANNEL_ADD_TO_LIST');
 export const removeChannelFromList = createAction('CHANNEL_REMOVE_FROM_LIST');
 export const renameTargetedChannel = createAction('TARGETED_CHANNEL_RENAME');
+export const cleanChannelFailure = createAction('CHANNEL_CLEAN_FAILURE');
 
 export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
 export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
 export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
+
 
 export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
 export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
