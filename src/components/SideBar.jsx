@@ -100,7 +100,7 @@ class SideBar extends React.Component {
           key={id}
         >
           <span className="p-2 mr-auto">{`# ${name}`}</span>
-          {removable ? this.renderOptions(id, name) : null}
+          {removable && this.renderOptions(id, name)}
         </a>
       ))}
     </div>

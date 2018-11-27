@@ -1,20 +1,8 @@
-import { pickBy, mapValues, omitBy } from 'lodash';
+import _ from 'lodash';
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
-
-const messageSendingState = handleActions({
-  [actions.sendMessageRequest]() {
-    return 'requested';
-  },
-  [actions.sendMessageFailure]() {
-    return 'failed';
-  },
-  [actions.sendMessageSuccess]() {
-    return 'successed';
-  },
-}, 'none');
 
 const channelAddingState = handleActions({
   [actions.addChannelRequest]() {
@@ -66,31 +54,33 @@ const messagesData = handleActions({
     return { ...state, [attributes.id]: attributes };
   },
   [actions.initializeMessageList](state, { payload: { messages } }) {
-    return { ...messages };
+    return _.keyBy(messages, 'id');
   },
   [actions.removeChannelFromList](state, { payload: { id } }) {
-    return pickBy(state, ({ channelId }) => channelId !== id);
+    return _.pickBy(state, ({ channelId }) => channelId !== id);
+    // here we filtrate with pickBy the state since our messages are listed by message id
   },
 }, {});
 
 const channelsData = handleActions({
   [actions.addChannelToList](state, { payload: { attributes } }) {
-    return { ...state, [attributes.id]: attributes };
+    const res = { ...state, [attributes.id]: attributes };
+    return res;
   },
   [actions.initializeChannelList](state, { payload: { channels } }) {
-    return { ...channels };
+    return _.keyBy(channels, 'id');
   },
   [actions.removeChannelFromList](state, { payload: { id } }) {
-    return omitBy(state, channel => channel.id === id);
+    return _.omit(state, id);
   },
   [actions.renameTargetedChannel](state, { payload: { data } }) {
     const { id, name } = data;
-    return mapValues(state, channel => (id === channel.id ? { ...channel, name } : channel));
+    return { ...state, [id]: { ...state[id], name } };
   },
 }, {});
 
 const modalData = handleActions({
-  [actions.sendMessageFailure]() {
+  [actions.showConnectionError]() {
     return {
       modalType: 'INFO_MODAL',
       modalProps: {
@@ -148,7 +138,6 @@ const currentChannel = handleActions({
 export default combineReducers({
   form: formReducer,
   messagesData,
-  messageSendingState,
   modalData,
   currentChannel,
   channelsData,

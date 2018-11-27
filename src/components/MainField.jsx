@@ -1,23 +1,23 @@
 import React from 'react';
 import InputForm from './InputForm';
-import { messagesSelector } from '../selectors';
+import { channelsMessagesSelector } from '../selectors';
 import connect from '../connect';
 
-const mapStateToProps = (state) => {
-  const { currentChannel } = state;
-  const props = {
-    messagesData: messagesSelector(state),
-    currentChannel,
+const mapState = () => {
+  const getMessages = channelsMessagesSelector();
+  return (state) => {
+    const { currentChannel } = state;
+    const props = {
+      messagesData: getMessages(state, currentChannel),
+      currentChannel,
+    };
+    return props;
   };
-  return props;
 };
 
-const renderMessages = (currentChannel, messages) => {
-  const channelMessages = messages
-    .filter(({ channelId }) => channelId === currentChannel)
-    .reverse();
-  if (channelMessages.length === 0) return null;
-  return channelMessages.map(({ message, author, id }) => (
+const renderMessages = (messages) => {
+  if (messages.length === 0) return null;
+  return messages.map(({ message, author, id }) => (
     <div key={id}>
       <b>{ author }</b>
       <p>{ message }</p>
@@ -25,10 +25,10 @@ const renderMessages = (currentChannel, messages) => {
   ));
 };
 
-@connect(mapStateToProps)
+@connect(mapState)
 class MainField extends React.Component {
   render() {
-    const { messagesData, currentChannel } = this.props;
+    const { messagesData } = this.props;
     return (
       <div className="col">
         <div className="row input">
@@ -37,7 +37,7 @@ class MainField extends React.Component {
           </div>
         </div>
         <div className="bg-white pre-scrollable">
-          {renderMessages(currentChannel, messagesData)}
+          {renderMessages(messagesData)}
         </div>
       </div>
     );

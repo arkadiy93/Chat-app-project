@@ -2,7 +2,7 @@ import React from 'react';
 import InfoModal from './modals/InfoModal';
 import AddChannelModal from './modals/AddChannelModal';
 import DeleteConfirmModal from './modals/DeleteConfirmModal';
-import RenameChannelModal from './modals/RenameChannelModal.jsx';
+import RenameChannelModal from './modals/RenameChannelModal';
 import connect from '../connect';
 
 

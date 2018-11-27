@@ -1,11 +1,15 @@
 import { createSelector } from 'reselect';
 
 const getMessagesData = state => state.messagesData;
+const getCurrentChannel = (state, currentChannel) => currentChannel;
 const getChannels = state => state.channelsData;
 
-export const messagesSelector = createSelector(
+export const channelsMessagesSelector = () => createSelector(
+  getCurrentChannel,
   getMessagesData,
-  data => Object.values(data),
+  (currentChannel, data) => Object.values(data)
+    .filter(({ channelId }) => channelId === currentChannel)
+    .reverse(),
 );
 
 export const channelsSelector = createSelector(
