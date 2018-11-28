@@ -45,7 +45,7 @@ const renderField = ({
       <input {...input} className="form-control input-lg" disabled={submitting} type={type} />
     </div>
     {touched && (error && <span className="alert mx-auto mt-2 alert-danger">{error}</span>)}
-    {hasConnectionError ? renderError() : null}
+    {hasConnectionError && renderError()}
   </div>
 );
 

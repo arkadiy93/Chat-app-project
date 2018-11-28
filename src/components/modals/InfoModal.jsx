@@ -36,7 +36,7 @@ class InfoModal extends React.Component {
           </Modal.Header>
           <Modal.Body>{body}</Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleClose} className="btn btn-outline-success btn-lg">
               Close
             </Button>
           </Modal.Footer>
