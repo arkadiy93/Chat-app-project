@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
-import Button from 'react-bootstrap/lib/Button';
 import AddChannelForm from './AddChannelForm';
 import connect from '../../connect';
 
@@ -40,11 +39,6 @@ class AddChannelModal extends React.Component {
             {body}
             <AddChannelForm />
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleClose}>
-              Cancel
-            </Button>
-          </Modal.Footer>
         </Modal>
       </>
     );

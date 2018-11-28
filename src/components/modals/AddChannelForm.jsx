@@ -36,18 +36,15 @@ const renderField = ({
   input,
   label,
   type,
+  hasConnectionError,
   meta: { touched, error, submitting },
 }) => (
   <div className="input-group input-group-lg">
     <div className="input-group input-group-lg">
       <input {...input} className="form-control input-lg" disabled={submitting} placeholder={label} type={type} />
-      <span className="input-group-btn">
-        <button className="btn btn-default btn-lg" type="submit" disabled={submitting}>
-        Set!
-        </button>
-      </span>
     </div>
     {touched && (error && <span className="alert mx-auto mt-2 alert-danger">{error}</span>)}
+    {hasConnectionError ? renderError() : null}
   </div>
 );
 
@@ -61,6 +58,12 @@ class AddChannelForm extends React.Component {
     const { addChannel, channelsData } = this.props;
     return addChannel(channelName, channelsData);
   };
+
+  handleClose = () => {
+    const { closeModalWindow, cleanChannelFailure } = this.props;
+    closeModalWindow();
+    cleanChannelFailure();
+  }
 
   render() {
     const { handleSubmit, channelAddingState } = this.props;
@@ -76,8 +79,16 @@ class AddChannelForm extends React.Component {
           label="Channel name"
           component={renderField}
           validate={validation}
+          hasConnectionError={hasConnectionError}
         />
-        {hasConnectionError ? renderError() : null}
+        <div className="w-100 d-flex justify-content-end mt-3">
+          <button onClick={this.handleClose} type="button" className="btn btn-outline-secondary mx-2">
+            Cancel
+          </button>
+          <button type="submit" className="btn btn-outline-success btn-lg">
+            Add!
+          </button>
+        </div>
       </form>
     );
   }

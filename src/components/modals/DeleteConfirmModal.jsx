@@ -59,12 +59,12 @@ class DeleteConfirmModal extends React.Component {
           <Modal.Body>{body}</Modal.Body>
           {hasConnectionError ? renderError() : null}
           <Modal.Footer>
-            <div className="mx-auto">
-              <Button className="mr-3" onClick={this.handleConfirm(id)}>
-                Delete!
-              </Button>
-              <Button onClick={this.handleClose}>
+            <div className="w-100 d-flex justify-content-end mt-3">
+              <Button className="btn btn-outline-secondary mx-2" onClick={this.handleClose}>
                 Cancel
+              </Button>
+              <Button className="btn btn-outline-success btn-lg" onClick={this.handleConfirm(id)}>
+                Delete!
               </Button>
             </div>
           </Modal.Footer>

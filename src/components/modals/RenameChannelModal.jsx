@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
-import Button from 'react-bootstrap/lib/Button';
 import RenameChannelForm from './RenameChannelForm';
 import connect from '../../connect';
 
@@ -46,11 +45,6 @@ class RenameChannelModal extends React.Component {
             {body}
             <RenameChannelForm currentName={targetName} id={id} />
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleClose}>
-              Cancel
-            </Button>
-          </Modal.Footer>
         </Modal>
       </>
     );
