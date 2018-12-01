@@ -27,17 +27,35 @@ const renderMessages = (messages) => {
 
 @connect(mapState)
 class MainField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.messagesWindowRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.scrollDownMessages();
+  }
+
+  componentDidUpdate() {
+    this.scrollDownMessages();
+  }
+
+  scrollDownMessages() {
+    const targetNode = this.messagesWindowRef.current;
+    targetNode.scrollTop = targetNode.scrollHeight;
+  }
+
   render() {
     const { messagesData } = this.props;
     return (
-      <div className="col">
-        <div className="row input">
-          <div className="col-lg-12">
+      <div className="col pr-0 d-flex flex-column my-3">
+        <div className="bg-white messages-window flex-grow-1 mx-100" ref={this.messagesWindowRef}>
+          {renderMessages(messagesData)}
+        </div>
+        <div className="row input mw-100">
+          <div className="col-lg-12 mw-100">
             <InputForm />
           </div>
-        </div>
-        <div className="bg-white pre-scrollable">
-          {renderMessages(messagesData)}
         </div>
       </div>
     );

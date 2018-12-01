@@ -81,15 +81,6 @@ class SideBar extends React.Component {
 
   renderChannels = channels => (
     <div className="list-group list-group-flush">
-      <button
-        className="btn btn-outline-dark border-0 w-50"
-        type="button"
-        title="Add new channel"
-        onMouseDown={this.preventFocus}
-        onClick={this.handleAddButton}
-      >
-        <Octicon icon={Plus} ariaLabel="Add new item" />
-      </button>
       {channels.map(({ id, name, removable }) => (
         <a
           role="button"
@@ -109,11 +100,20 @@ class SideBar extends React.Component {
   render() {
     const { channelsData } = this.props;
     return (
-      <div className="col-3" align="center">
-        <div className="">
-          <h5>Channels</h5>
+      <div className="mh-100 col-3 pl-0 my-3">
+        <div className="row pl-5">
+          <h5 className="pr-2 pt-2">Channels</h5>
+          <button
+            className="btn btn-outline-dark border-0 add-button mb-2"
+            type="button"
+            title="Add new channel"
+            onMouseDown={this.preventFocus}
+            onClick={this.handleAddButton}
+          >
+            <Octicon icon={Plus} ariaLabel="Add new item" />
+          </button>
         </div>
-        <div className="">
+        <div className="channel-list">
           {this.renderChannels(channelsData)}
         </div>
       </div>

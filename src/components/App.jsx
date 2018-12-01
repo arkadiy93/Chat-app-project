@@ -4,10 +4,12 @@ import MainField from './MainField';
 import ModalRoot from './ModalRoot';
 
 const App = () => (
-  <div className="row h-100">
-    <SideBar />
-    <MainField />
-    <ModalRoot />
+  <div className="container-fluid h-100">
+    <div className="row h-100">
+      <SideBar />
+      <MainField />
+      <ModalRoot />
+    </div>
   </div>
 );
 

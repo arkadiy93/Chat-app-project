@@ -1,3 +1,26 @@
-.fade.in {
-  opacity: 1;
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+#chat {
+  height: 100%
+}
+
+.messages-window {
+  overflow-y: scroll;
+  max-height: 95%;
+}
+
+.channel-list {
+  overflow-y: auto;
+  max-height: 95%;
+}
+
+.add-button {
+ width: 40px;
+ height: 40px;
+ line-height: 40px;
+ padding:0;
+ border-radius: 50%;
 }

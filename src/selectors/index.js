@@ -8,8 +8,7 @@ export const channelsMessagesSelector = () => createSelector(
   getCurrentChannel,
   getMessagesData,
   (currentChannel, data) => Object.values(data)
-    .filter(({ channelId }) => channelId === currentChannel)
-    .reverse(),
+    .filter(({ channelId }) => channelId === currentChannel),
 );
 
 export const channelsSelector = createSelector(

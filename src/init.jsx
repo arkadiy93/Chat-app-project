@@ -14,21 +14,19 @@ import * as actions from './actions';
 const initializeProject = (store, initialData) => {
   const { messages, channels } = initialData;
   const socket = io();
-  socket.on('newMessage', ({ data }) => {
-    const { attributes } = data;
+  socket.on('newMessage', ({ data: { attributes } }) => {
     store.dispatch(actions.addMessageToList({ attributes }));
-  });
-  socket.on('newChannel', ({ data }) => {
-    const { attributes } = data;
-    store.dispatch(actions.addChannelToList({ attributes }));
-  });
-  socket.on('removeChannel', ({ data: { id } }) => {
-    store.dispatch(actions.removeChannelFromList({ id }));
-  });
-  socket.on('renameChannel', ({ data: { attributes: { id, name } } }) => {
-    const data = { id, name };
-    store.dispatch(actions.renameTargetedChannel({ data }));
-  });
+  })
+    .on('newChannel', ({ data: { attributes } }) => {
+      store.dispatch(actions.addChannelToList({ attributes }));
+    })
+    .on('removeChannel', ({ data: { id } }) => {
+      store.dispatch(actions.removeChannelFromList({ id }));
+    })
+    .on('renameChannel', ({ data: { attributes: { id, name } } }) => {
+      const data = { id, name };
+      store.dispatch(actions.renameTargetedChannel({ data }));
+    });
   store.dispatch(actions.initializeMessageList({ messages }));
   store.dispatch(actions.initializeChannelList({ channels }));
 };
@@ -38,7 +36,7 @@ export default (initialData) => {
   /* eslint-disable no-underscore-dangle */
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   /* eslint-enable */
-  const store = createStore(reducers, /* preloadedState, */ composeEnhancers(
+  const store = createStore(reducers, composeEnhancers(
     applyMiddleware(thunk),
   ));
   initializeProject(store, initialData);
