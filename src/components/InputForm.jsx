@@ -29,10 +29,7 @@ class InputForm extends React.Component {
     return (
       <DataConsumer>
         {author => (
-          <form
-            onSubmit={handleSubmit(this.sendMessage(author))}
-            className="input-group input-group-lg"
-          >
+          <form onSubmit={handleSubmit(this.sendMessage(author))} className="input-group input-group-lg">
             <Field
               name="message"
               type="text"
@@ -42,13 +39,7 @@ class InputForm extends React.Component {
               disabled={submitting}
             />
             <span className="input-group-btn">
-              <button
-                className="btn btn-default btn-lg"
-                type="submit"
-                disabled={submitting}
-              >
-              Send
-              </button>
+              <button className="btn btn-default btn-lg" type="submit" disabled={submitting}>Send</button>
             </span>
           </form>
         )
