@@ -25,4 +25,5 @@ make start
 ```
 
 or you can visit: [Live Demo](https://slack-project-arkadiy.herokuapp.com/) 
+
 (You may need to reload 2-3 times the page until heroku dynos load properly and project "wake up")
